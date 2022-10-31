@@ -38,7 +38,6 @@ const currentInput: Ref<FolderType> = ref({
 
 const testClick = (input: FolderHiddenType) => {
   const inputRef = currentInput.value;
-  console.log(input);
 
   if (input.ids.length === 1) {
     inputRef.isSubFolderHidden = input.hiddenStatus;
@@ -48,30 +47,26 @@ const testClick = (input: FolderHiddenType) => {
   const newIds = [...input.ids];
   newIds.shift();
 
-  let currentRef: FolderType | null = null;
-
-  newIds.forEach((item, index) => {
-    if (currentRef !== null && inputRef.folderList) {
-      const result = inputRef.folderList.find((inputRefItem) => {
-        return inputRefItem.id === item;
-      });
-      if (!result) return;
-      currentRef = result;
+  let temp: FolderType  = {
+    id: '',
+    title: '',
+  }
+  newIds.forEach(item => {
+    if (temp.id === '') {
+      if (!inputRef.folderList) return;
+      const findFolderItem = inputRef.folderList.find(inputItem => inputItem.id === item);
+      if (!findFolderItem) return;
+      temp = findFolderItem;
       return;
     }
-
-    if (currentRef === null) return;
-    if (!currentRef.folderList) return;
-    const getContent = currentRef.folderList.find((findItem) => {
-      return findItem.id === item;
-    });
-    if (!getContent) return;
-    currentRef = getContent;
-
-    if ((newIds.length - 1) === index) {
-      currentRef.isSubFolderHidden = input.hiddenStatus;
-    }
-  })
+    if (!temp.folderList) return;
+    const findItem = temp.folderList.find(inputItem => inputItem.id === item);
+    if (!findItem) return;
+    temp = findItem;
+  }) 
+  if (temp.id !== '') {
+    temp.isSubFolderHidden = input.hiddenStatus;
+  }
 
 }
 </script>
