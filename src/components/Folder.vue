@@ -29,7 +29,7 @@ const testConnection = (input: FolderHiddenType) => {
     <div
       @click="testConnection({
         ids: [],
-        hiddenStatus: !folderInput.isHidden,
+        hiddenStatus: !folderInput.isSubFolderHidden,
       })"
       class="select-none cursor-pointer"
     >
@@ -37,10 +37,16 @@ const testConnection = (input: FolderHiddenType) => {
         class="flex items-center space-x-2"
       >
         <div
-          v-if="folderInput.folderList"
+          v-if="folderInput.folderList && !folderInput.isSubFolderHidden"
           class="i-ant-design-folder-open-twotone"
         >
         </div>
+        <div
+          v-if="folderInput.folderList && folderInput.isSubFolderHidden"
+          class="i-ant-design-folder-twotone"
+        >
+        </div>
+
         <div>
           {{ folderInput.title }}
         </div>
@@ -48,7 +54,10 @@ const testConnection = (input: FolderHiddenType) => {
     </div>
     <div
       class="mt-2 space-y-2"
-      v-if="folderInput.folderList && folderInput.folderList.length > 0"
+      v-if="folderInput.folderList && 
+        folderInput.folderList.length > 0 && 
+        !folderInput.isSubFolderHidden
+      "
     >
       <Folder
         @update:changeRootHidden="testConnection"

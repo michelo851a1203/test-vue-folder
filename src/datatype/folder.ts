@@ -4,7 +4,7 @@ export interface FolderType {
   icon?: string;
   createTime?: string;
   currentFolderStyle?: string;
-  isHidden?: boolean;
+  isSubFolderHidden?: boolean;
   folderList?: FolderType[];
 }
 

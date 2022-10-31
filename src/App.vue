@@ -41,7 +41,7 @@ const testClick = (input: FolderHiddenType) => {
   console.log(input);
 
   if (input.ids.length === 1) {
-    inputRef.isHidden = input.hiddenStatus;
+    inputRef.isSubFolderHidden = input.hiddenStatus;
     return
   }
 
@@ -69,7 +69,7 @@ const testClick = (input: FolderHiddenType) => {
     currentRef = getContent;
 
     if ((newIds.length - 1) === index) {
-      currentRef.isHidden = input.hiddenStatus;
+      currentRef.isSubFolderHidden = input.hiddenStatus;
     }
   })
 
