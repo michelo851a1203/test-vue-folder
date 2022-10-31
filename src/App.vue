@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Folder from './components/Folder.vue';
+import FolderTab from './components/FolderTab.vue';
 import { ref, Ref } from 'vue';
 import { FolderHiddenType, FolderType } from './datatype/folder';
 
@@ -72,7 +73,11 @@ const testClick = (input: FolderHiddenType) => {
 </script>
 
 <template>
+  <FolderTab
+    class="w-1/2 mb-4"
+  ></FolderTab>
   <Folder
+    class="w-1/2"
     @update:changeRootHidden="testClick"
     :folderInput="currentInput"
   ></Folder>
