@@ -4,7 +4,7 @@ import { ref, Ref } from 'vue';
 import { FolderHiddenType, FolderType } from './datatype/folder';
 
 const currentInput: Ref<FolderType> = ref({
-  id: 'id1',
+  id: 'root1',
   title: 'root title',
   folderList: [
     {
@@ -37,10 +37,42 @@ const currentInput: Ref<FolderType> = ref({
 });
 
 const testClick = (input: FolderHiddenType) => {
-  for (let index = input.layerCount;index > 0; index--) {
-    currentInput.value
-  }
+  const inputRef = currentInput.value;
   console.log(input);
+
+  if (input.ids.length === 1) {
+    inputRef.isHidden = input.hiddenStatus;
+    return
+  }
+
+  const newIds = [...input.ids];
+  newIds.shift();
+
+  let currentRef: FolderType | null = null;
+
+  newIds.forEach((item, index) => {
+    if (currentRef !== null && inputRef.folderList) {
+      const result = inputRef.folderList.find((inputRefItem) => {
+        return inputRefItem.id === item;
+      });
+      if (!result) return;
+      currentRef = result;
+      return;
+    }
+
+    if (currentRef === null) return;
+    if (!currentRef.folderList) return;
+    const getContent = currentRef.folderList.find((findItem) => {
+      return findItem.id === item;
+    });
+    if (!getContent) return;
+    currentRef = getContent;
+
+    if ((newIds.length - 1) === index) {
+      currentRef.isHidden = input.hiddenStatus;
+    }
+  })
+
 }
 </script>
 

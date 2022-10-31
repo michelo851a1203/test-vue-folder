@@ -12,9 +12,10 @@ const emit = defineEmits<{
 
 
 const testConnection = (input: FolderHiddenType) => {
+  const ids = [...input.ids];
+  ids.unshift(props.folderInput.id);
   emit('update:changeRootHidden', {
-    id: input.id,
-    layerCount: ++input.layerCount,
+    ids,
     hiddenStatus: input.hiddenStatus,
   })
 }
@@ -27,13 +28,23 @@ const testConnection = (input: FolderHiddenType) => {
   >
     <div
       @click="testConnection({
-        id: folderInput.id,
-        layerCount: 0,
+        ids: [],
         hiddenStatus: !folderInput.isHidden,
       })"
       class="select-none cursor-pointer"
     >
-      {{ folderInput.title }}
+      <div
+        class="flex items-center space-x-2"
+      >
+        <div
+          v-if="folderInput.folderList"
+          class="i-ant-design-folder-open-twotone"
+        >
+        </div>
+        <div>
+          {{ folderInput.title }}
+        </div>
+      </div>
     </div>
     <div
       class="mt-2 space-y-2"

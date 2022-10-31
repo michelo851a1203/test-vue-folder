@@ -9,7 +9,6 @@ export interface FolderType {
 }
 
 export interface FolderHiddenType {
-  id: string;
+  ids: string[];
   hiddenStatus: boolean;
-  layerCount: number;
 }
