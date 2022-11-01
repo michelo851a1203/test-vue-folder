@@ -2,11 +2,11 @@
 import FolderTabObject from './FolderTabObject.vue';
 import FolderDivider from './FolderDivider.vue';
 
-const props = withDefaults(defineProps<{
-
-}>(), {
-
-})
+// const props = withDefaults(defineProps<{
+//
+// }>(), {
+//
+// })
 
 
 </script>
@@ -19,12 +19,12 @@ const props = withDefaults(defineProps<{
     "
   >
     <FolderTabObject
-      title="test cool"
+      title="root title"
       isOpen
     ></FolderTabObject>
     <FolderDivider></FolderDivider>
     <FolderTabObject
-      title="test wow"
+      title="new title 2"
     ></FolderTabObject>
   </article>
 </template>

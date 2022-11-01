@@ -27,6 +27,12 @@ const currentInput: Ref<FolderType> = ref({
         {
           id: 'cool3',
           title: 'content new title 3',
+          // folderList: [
+          //   {
+          //     id: 'wow1',
+          //     title: 'wow test1',
+          //   }
+          // ]
         },
       ]
     },
